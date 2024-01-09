@@ -35,17 +35,26 @@ export default function Serch() {
     const navigator=useNavigate();
     const [nickname, setNickname]=useState("");
 
+    const deletSpace=(event)=>{
+        const newValue=event.target.value.replace(/\s/g, '');
+        setNickname(newValue);
+    }
     const goPower=(event)=>{
         if(event.key==="Enter"){
-            navigator("/power", {
-                state: {
-                    name: nickname
-                }
-            });
+            if(nickname.length>0){   
+                navigator("/power", {
+                    state: {
+                        name: nickname
+                    }
+                });
+            } else(
+                alert("닉네임을 입력해주세요.")
+            )
         }
     }
     const getNickname=(event)=>{
         setNickname(event.target.value);
+        deletSpace(event)
     }
 
     return (

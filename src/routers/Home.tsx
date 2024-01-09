@@ -51,7 +51,7 @@ export default function Home() {
             <Leap src="image/leap2 2.png" style={{top: "10%", left: "80%", width: 200,height: 150}}></Leap>
             <Leap src="image/leap2.png" style={{top: "70%", left: "75%", width: 200,height: 150}}></Leap>
             <Boss src="image/Boss.gif" style={{top: "50%", left: "40%"}}></Boss>
-            <Set href="https://github.com/gunhee0421/MaplePower"><SetImg src="image/Build circle.png"/></Set>
+            <Set href="https://github.com/gunhee0421"><SetImg src="image/Build circle.png"/></Set>
 
             <Serch></Serch>
         </div>
