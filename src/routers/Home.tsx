@@ -47,9 +47,9 @@ export default function Home() {
         <div>
             <Mushroom src="image/maplelogo.gif" alt="watiting"/>
             <Title>Maple Power <br></br> Converter</Title>
-            <Leap src="image/leap2 3 (1).png" style={{top: "65%", left: "15%", width: 200,height: 150}}></Leap>
-            <Leap src="image/leap2 2.png" style={{top: "10%", left: "80%", width: 200,height: 150}}></Leap>
-            <Leap src="image/leap2.png" style={{top: "70%", left: "75%", width: 200,height: 150}}></Leap>
+            <Leap src="image/leap1.png" style={{top: "65%", left: "15%", width: 200,height: 150}}></Leap>
+            <Leap src="image/leap2.png" style={{top: "10%", left: "80%", width: 200,height: 150}}></Leap>
+            <Leap src="image/leap3.png" style={{top: "70%", left: "75%", width: 200,height: 150}}></Leap>
             <Boss src="image/Boss.gif" style={{top: "50%", left: "40%"}}></Boss>
             <Set href="https://github.com/gunhee0421"><SetImg src="image/Build circle.png"/></Set>
 

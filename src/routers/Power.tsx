@@ -1,16 +1,17 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components";
 import RetrunHome from "../component/ReturnHome";
 import Getocid from "../component/GetOcid";
-import { useEffect, useState } from "react";
 import Getuserinfo from "../component/GetUserInfo";
+import Getpower from "../component/GetPower";
+import { useState } from "react";
+import PowerShow from "../component/PowerShow";
 
 const UserImg=styled.img`
     position: absolute;
     height: 194px;
     left: 15%;
     top: 30%;
-    border-radius: 125.5px;
 `;
 const ShowText=styled.div`
     position: absolute;
@@ -21,7 +22,7 @@ const ShowText=styled.div`
     font-size: 40px;
     font-family: 'Jua';
     font-weight: 400;
-    line-height: 40px;
+    line-height: 60px;
     letter-spacing: 5px;
     word-wrap: break-word;
 `;
@@ -36,7 +37,11 @@ const Usrname=styled.span`
     line-height: 40px;
     letter-spacing: 5px;
     word-wrap: break-word;
-`
+`;
+const UserUI=styled.div`
+    width: 30%;
+    text-align: center;
+`;
 
 const API_KEY="test_3c21c9aae86447287477c3c16c0086e403aef7eb562f1bce33e8adc5056d3d102efe1676341768c46a0a1c770c79b82b";
 
@@ -49,20 +54,35 @@ if(today.getDay()<10){
 }
 
 export default function Power() {
+    const navigation=useNavigate();
     const location=useLocation();
-    const nickname=location.state?.name || '';
+    const [nickname, setNickname]=useState(location.state?.name || 'N/A');
 
-    const ocid=Getocid(API_KEY, nickname);
-    const info=Getuserinfo(API_KEY, ocid.ocid, Time);    
+    const ocid=Getocid(API_KEY, nickname) || "N/A";
+    if(ocid==="N/A"){
+        alert("없는 캐릭터 입니다. 다시 입력해주세요.")
+        navigation("/");
+    }
+    const info=Getuserinfo(API_KEY, ocid.ocid, Time);
+    const power=Getpower(API_KEY, ocid.ocid, Time);
+
+    const combatpower1=power ? power.final_stat[42].stat_value : "N/A";
+
+    const combatpower=PowerShow(combatpower1);
+
 
     return (
         <div>
             <RetrunHome></RetrunHome>
-            <div style={{width: "30%"}}>
+            <UserUI>
                 <UserImg src={info ? info.character_image : "image/maplelogo.gif"}></UserImg>
-                <Usrname>{nickname}</Usrname>
-            </div>
-            <ShowText>직업: {info ? info.character_class : "무직"}<br></br>레벨: {info ? info.character_level+"Lv" : "0Lv"}<br></br>전투력:</ShowText>
+                <Usrname>{info ? info.character_name : "N/A"}</Usrname>
+            </UserUI>
+            <ShowText>직업: {info ? info.character_class : "N/A"}
+                <br></br>레벨: {info ? info.character_level+"Lv" : "0Lv"}
+                <br></br>전투력: {combatpower}
+                <br></br>전투력 배율: 
+            </ShowText>
         </div>
     )
 }
