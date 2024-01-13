@@ -4,8 +4,10 @@ import RetrunHome from "../component/ReturnHome";
 import Getocid from "../component/GetOcid";
 import Getuserinfo from "../component/GetUserInfo";
 import Getpower from "../component/GetPower";
-import { useState } from "react";
 import PowerShow from "../component/PowerShow";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import GetCombat from "../component/getCombat";
 
 const UserImg=styled.img`
     position: absolute;
@@ -58,11 +60,7 @@ export default function Power() {
     const location=useLocation();
     const [nickname, setNickname]=useState(location.state?.name || 'N/A');
 
-    const ocid=Getocid(API_KEY, nickname) || "N/A";
-    if(ocid==="N/A"){
-        alert("없는 캐릭터 입니다. 다시 입력해주세요.")
-        navigation("/");
-    }
+    const ocid=Getocid(API_KEY, nickname);
     const info=Getuserinfo(API_KEY, ocid.ocid, Time);
     const power=Getpower(API_KEY, ocid.ocid, Time);
 
@@ -70,6 +68,11 @@ export default function Power() {
 
     const combatpower=PowerShow(combatpower1);
 
+    useEffect(()=>{
+        if(ocid==="N/A"){
+            alert("없는 캐릭터 입니다.")
+        }
+    })
 
     return (
         <div>
@@ -81,7 +84,8 @@ export default function Power() {
             <ShowText>직업: {info ? info.character_class : "N/A"}
                 <br></br>레벨: {info ? info.character_level+"Lv" : "0Lv"}
                 <br></br>전투력: {combatpower}
-                <br></br>전투력 배율: 
+                <br></br>전투력 배율:  
+                <br></br>표준 전투력: 
             </ShowText>
         </div>
     )

@@ -38,7 +38,7 @@ const SetImg=styled.img`
     position: absolute;
     width: 50px;
     height: 50px;
-    left: 90%;
+    left: 95%;
     top: 5%;
 `
 

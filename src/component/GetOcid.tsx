@@ -18,7 +18,7 @@ export default function Getocid(apiKey, nickname) {
                 });
                 return response.data;
             } catch(error){
-                return null;
+                return "N/A";
             }
         };
         fetchData().then((data)=>{
