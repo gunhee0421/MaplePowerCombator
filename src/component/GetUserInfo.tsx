@@ -15,14 +15,12 @@ export default function Getuserinfo(apikey, ocid, time) {
                         "x-nxopen-api-key":apikey
                     }
                 });
-                return response.data;
+                setInfo(response.data);
             } catch(error){
-                return null;
+                console.log(error);
             }
         };
-        fetchData().then((data)=>{
-            setInfo(data);
-        });
+        fetchData();
     }, [apikey, ocid, time]);
 
     return info;

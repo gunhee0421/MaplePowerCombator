@@ -15,14 +15,12 @@ export default function Getpower(apikey, ocid, time) {
                         "x-nxopen-api-key":apikey
                     }
                 });
-                return response.data
+                setPower(response.data);
             } catch(error){
-                return null;
+                console.log(error);
             }
         };
-        fetchDate().then((data)=>{
-            setPower(data);
-        });
+        fetchDate();
     },[apikey, ocid, time]);
 
     return power;

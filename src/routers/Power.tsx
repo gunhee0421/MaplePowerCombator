@@ -1,13 +1,12 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import styled from "styled-components";
 import RetrunHome from "../component/ReturnHome";
 import Getocid from "../component/GetOcid";
 import Getuserinfo from "../component/GetUserInfo";
 import Getpower from "../component/GetPower";
 import PowerShow from "../component/PowerShow";
+import GetMultiple from "../component/GetMultiple";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import GetCombat from "../component/getCombat";
 
 const UserImg=styled.img`
     position: absolute;
@@ -18,7 +17,7 @@ const UserImg=styled.img`
 const ShowText=styled.div`
     position: absolute;
     height: 60%;
-    left: 30%;
+    left: 40%;
     top: 30%;
     color: red;
     font-size: 40px;
@@ -47,45 +46,57 @@ const UserUI=styled.div`
 
 const API_KEY="test_3c21c9aae86447287477c3c16c0086e403aef7eb562f1bce33e8adc5056d3d102efe1676341768c46a0a1c770c79b82b";
 
-let today=new Date();
+const today=new Date();
 let Time=today.getFullYear()+'-'+today.getMonth()+1+'-';
-if(today.getDay()<10){
-    Time=Time+"0"+today.getDay();
+const minToday=today.getDate()-1;
+if(minToday<10){
+    Time=Time+"0"+minToday;
 } else{
-    Time=Time+today.getDay();
+    Time=Time+minToday;
 }
-
 export default function Power() {
-    const navigation=useNavigate();
     const location=useLocation();
-    const [nickname, setNickname]=useState(location.state?.name || 'N/A');
+    const nickname=location.state?.name || 'N/A';
 
-    const ocid=Getocid(API_KEY, nickname);
-    const info=Getuserinfo(API_KEY, ocid.ocid, Time);
+    const ocid=Getocid(API_KEY, nickname) || "N/A";
+
+    const info=Getuserinfo(API_KEY, ocid.ocid, Time) || "N/A";
+    
     const power=Getpower(API_KEY, ocid.ocid, Time);
 
     const combatpower1=power ? power.final_stat[42].stat_value : "N/A";
 
     const combatpower=PowerShow(combatpower1);
 
+    const [warning, setWarning]=useState(false);
+    const multiple=GetMultiple(info.character_class);
+
+    const powermultyple=combatpower1 * multiple;
+
+    const localPower=PowerShow(powermultyple);
+
     useEffect(()=>{
-        if(ocid==="N/A"){
+        if(ocid==="X"){
             alert("없는 캐릭터 입니다.")
         }
-    })
+        if(multiple===null){
+            setWarning(true);
+        }
+    }, [ocid])
 
     return (
         <div>
             <RetrunHome></RetrunHome>
             <UserUI>
-                <UserImg src={info ? info.character_image : "image/maplelogo.gif"}></UserImg>
-                <Usrname>{info ? info.character_name : "N/A"}</Usrname>
+                <UserImg src={info!=="N/A" ? info.character_image : "image/maplelogo.gif"}></UserImg>
+                <Usrname>{info!=="N/A" ? info.character_name : "N/A"}</Usrname>
             </UserUI>
-            <ShowText>직업: {info ? info.character_class : "N/A"}
-                <br></br>레벨: {info ? info.character_level+"Lv" : "0Lv"}
-                <br></br>전투력: {combatpower}
-                <br></br>전투력 배율:  
-                <br></br>표준 전투력: 
+            <ShowText>직업: {info!=="N/A" ? info.character_class : "N/A"}
+                <br></br>레벨: {info!=="N/A" ? info.character_level+"Lv" : "0Lv"}
+                <br></br>전투력: {combatpower ? combatpower : "N/A"}
+                <br></br>전투력 배율: {multiple!=="N/A" ? multiple+"배" : multiple}
+                <br></br>표준 전투력: {localPower}
+                {warning ? <h1>제논과 데몬어벤져는 데이터가 부족해 나타나지 않습니다.</h1> : null}
             </ShowText>
         </div>
     )
