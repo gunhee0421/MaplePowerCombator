@@ -43,6 +43,18 @@ const UserUI=styled.div`
     width: 30%;
     text-align: center;
 `;
+const TopText=styled.div`
+    position: absolute;
+    width: 25%;
+    left: 5%;
+    top: 85%;
+    color: black;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 20px;
+    letter-spacing: 1px;
+    word-wrap: break-word;
+`
 
 const API_KEY="test_3c21c9aae86447287477c3c16c0086e403aef7eb562f1bce33e8adc5056d3d102efe1676341768c46a0a1c770c79b82b";
 
@@ -82,7 +94,7 @@ export default function Power() {
         if(multiple===null){
             setWarning(true);
         }
-    }, [ocid])
+    }, [ocid, multiple])
 
     return (
         <div>
@@ -91,12 +103,13 @@ export default function Power() {
                 <UserImg src={info!=="N/A" ? info.character_image : "image/maplelogo.gif"}></UserImg>
                 <Usrname>{info!=="N/A" ? info.character_name : "N/A"}</Usrname>
             </UserUI>
+            <TopText>전투력의 경우 하루 전의 서버에 저장된 캐릭터의 스탯임으로 정확한 측정을 위해서는 캐릭터의 셋팅을 변경해 주시기 바랍니다.</TopText>
             <ShowText>직업: {info!=="N/A" ? info.character_class : "N/A"}
                 <br></br>레벨: {info!=="N/A" ? info.character_level+"Lv" : "0Lv"}
                 <br></br>전투력: {combatpower ? combatpower : "N/A"}
-                <br></br>전투력 배율: {multiple!=="N/A" ? multiple+"배" : multiple}
-                <br></br>표준 전투력: {localPower}
-                {warning ? <h1>제논과 데몬어벤져는 데이터가 부족해 나타나지 않습니다.</h1> : null}
+                <br></br>전투력 배율: {multiple!==null ? multiple+"배" : "N/A"}
+                <br></br>표준 전투력: {localPower!=0 ? localPower : "N/A"}
+                {warning ? <h1 style={{fontSize: "50px", padding: "30px 50px 0px 0px"}}>제논과 데몬어벤져는 데이터가 부족해 나타나지 않습니다.</h1> : null}
             </ShowText>
         </div>
     )
