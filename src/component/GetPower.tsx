@@ -3,8 +3,22 @@ import { useEffect, useState } from "react";
 
 const urlString="https://open.api.nexon.com/maplestory/v1/character/stat?ocid=";
 
-export default function Getpower(apikey, ocid, time) {
-    const [power, setPower]=useState(null);
+interface PowerObject{
+    final_stat: {
+        42: {
+            stat_value: string;
+        };
+    };
+}
+
+export default function Getpower(apikey: string, ocid: string, time: string) {
+    const [power, setPower]=useState<PowerObject>({
+        final_stat: {
+            42: {
+                stat_value: "",
+            }
+        }
+    });
     const url=urlString+ocid+"&date="+time;
 
     useEffect(()=>{
@@ -21,7 +35,7 @@ export default function Getpower(apikey, ocid, time) {
             }
         };
         fetchDate();
-    },[apikey, ocid, time]);
+    },[apikey, ocid, time, url]);
 
     return power;
 }

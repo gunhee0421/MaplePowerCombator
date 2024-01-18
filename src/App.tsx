@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 const router=createBrowserRouter([
   {
-    path:"MaplePower/",
+    path:"/",
     element:(
       <Home></Home>
     )
   },
   {
-    path:"MaplePower/power",
+    path:"/power",
     element:(
       <Power></Power>
     )

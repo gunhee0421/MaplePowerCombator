@@ -3,8 +3,16 @@ import { useEffect, useState } from "react"
 
 
 const urlString="https://open.api.nexon.com/maplestory/v1/character/basic?ocid="
-export default function Getuserinfo(apikey, ocid, time) {
-    const [info, setInfo]=useState(null);
+
+interface InfoObject{
+    character_image: string;
+    character_name: string;
+    character_class: string;
+    character_level: string;
+}
+
+export default function Getuserinfo(apikey: string, ocid: string, time: string) {
+    const [info, setInfo]=useState<InfoObject>({"character_image": "", "character_name" : "", "character_class": "", "character_level": ""});
     const url=urlString+ocid+"&date="+time;
 
     useEffect(()=>{
@@ -21,7 +29,7 @@ export default function Getuserinfo(apikey, ocid, time) {
             }
         };
         fetchData();
-    }, [apikey, ocid, time]);
+    }, [apikey, ocid, time, url]);
 
     return info;
 }

@@ -1,12 +1,11 @@
 
 
-export default function PowerShow(combatpower) {
-    let power=parseInt(combatpower);
-    let n=combatpower.length;
+export default function PowerShow(combatpower: string) {
+    const power=parseInt(combatpower);
 
-    let a=power%10000;
-    let b=(power%100000000-a)/10000;
-    let c=Math.trunc(power/100000000);
+    const a=power%10000;
+    const b=(power%100000000-a)/10000;
+    const c=Math.trunc(power/100000000);
 
     let showText="";
 

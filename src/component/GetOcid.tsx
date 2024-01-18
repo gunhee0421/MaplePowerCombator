@@ -4,8 +4,13 @@ import { useEffect, useState } from "react";
 
 const urlString="https://open.api.nexon.com/maplestory/v1/id?character_name=";
 
-export default function Getocid(apiKey,nickname) {
-    const [ocid, setOcid]=useState(null);
+interface OcidObject{
+    ocid: string;
+}
+
+
+export default function Getocid(apiKey: string,nickname: string) {
+    const [ocid, setOcid]=useState<OcidObject>({"ocid": ""});
     const url=urlString+nickname;
 
     useEffect(()=>{
@@ -19,7 +24,7 @@ export default function Getocid(apiKey,nickname) {
                 setOcid(response.data);
             } catch(error){
                 console.log(error);
-                setOcid("X");
+                setOcid({"ocid": "X"});
             }
         };
         fetchData();

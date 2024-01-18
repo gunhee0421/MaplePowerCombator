@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -35,11 +35,11 @@ export default function Serch() {
     const navigator=useNavigate();
     const [nickname, setNickname]=useState("");
 
-    const deletSpace=(event)=>{
+    const deletSpace=(event: React.ChangeEvent<HTMLInputElement>)=>{
         const newValue=event.target.value.replace(/\s/g, '');
         setNickname(newValue);
     }
-    const goPower=(event)=>{
+    const goPower=(event: React.KeyboardEvent<HTMLInputElement>)=>{
         if(event.key==="Enter"){
             if(nickname.length>0){   
                 navigator("/power", {
@@ -52,7 +52,7 @@ export default function Serch() {
             )
         }
     }
-    const getNickname=(event)=>{
+    const getNickname=(event: React.ChangeEvent<HTMLInputElement>)=>{
         setNickname(event.target.value);
         deletSpace(event)
     }
