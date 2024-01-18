@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom"
 import styled from "styled-components";
-import RetrunHome from "../component/ReturnHome";
-import Getocid from "../component/GetOcid";
-import Getuserinfo from "../component/GetUserInfo";
-import Getpower from "../component/GetPower";
-import PowerShow from "../component/PowerShow";
-import GetMultiple from "../component/GetMultiple";
+import RetrunHome from "../components/ReturnHome";
+import Getocid from "../components/GetOcid";
+import Getuserinfo from "../components/GetUserInfo";
+import Getpower from "../components/GetPower";
+import PowerShow from "../components/PowerShow";
+import GetMultiple from "../components/GetMultiple";
 import { useEffect, useState } from "react";
 
 const UserImg=styled.img`

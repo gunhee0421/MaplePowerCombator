@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Serch from "../component/Serch";
+import Serch from "../components/Serch";
 
 const Mushroom=styled.img`
     position: absolute;
