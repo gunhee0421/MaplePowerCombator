@@ -1,23 +1,25 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./routers/Home"
 import Power from "./routers/Power"
 import styled from "styled-components";
 
 
-const router=createBrowserRouter([
-  {
-    path:"/",
-    element:(
-      <Home></Home>
-    )
-  },
-  {
-    path:"/power",
-    element:(
-      <Power></Power>
-    )
-  }
-]);
+// const router=createBrowserRouter([
+//   {
+//     path:"process.env.PUBLIC_URL",
+//     element:(
+//       <Home></Home>
+//     )
+//   },
+//   {
+//     path:"/power",
+//     element:(
+//       <Power></Power>
+//     )
+//   }
+// ]);
+
+
 const Wrapper=styled.div`
   width: 100%;
   height: 100vh;
@@ -28,7 +30,13 @@ const Wrapper=styled.div`
 function App() {
   return (
     <Wrapper>
-      <RouterProvider router={router}/>
+      {/* <RouterProvider router={router}/> */}
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/power" element={<Power />} />
+        </Routes>
+      </BrowserRouter>
     </Wrapper>
   )
 }
