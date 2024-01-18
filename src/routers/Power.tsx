@@ -90,7 +90,6 @@ export default function Power() {
 
     const ocidValue: OcidObject | null=Getocid(API_KEY, nickname);
     const ocid: string = ocidValue ? ocidValue.ocid : "N/A";
-    // const ocid=Getocid(API_KEY, nickname) || "N/A";
 
     const infoValue: InfoObject | null = Getuserinfo(API_KEY, ocid, Time);
     const info_image: string = infoValue.character_image;
@@ -98,12 +97,10 @@ export default function Power() {
     const info_class: string = infoValue.character_class;
     const info_level: string = infoValue.character_level;
 
-    // const info=Getuserinfo(API_KEY, ocid, Time) || "N/A";
 
     const powerValue: PowerObject | null = Getpower(API_KEY, ocid, Time);
     const power: string = powerValue ? powerValue.final_stat[42].stat_value : "N/A";
     const combatpower=PowerShow(power);
-    // const power=Getpower(API_KEY, ocid, Time);
 
     const [warning, setWarning]=useState(false);
     const multiple = GetMultiple(info_class) || 0;
@@ -138,22 +135,4 @@ export default function Power() {
             </ShowText>
         </div>
     )
-
-    // return (
-    //     <div>
-    //         <RetrunHome></RetrunHome>
-    //         <UserUI>
-    //             <UserImg src={info!=="N/A" ? info.character_image : "image/maplelogo.gif"}></UserImg>
-    //             <Usrname>{info!=="N/A" ? info.character_name : "N/A"}</Usrname>
-    //         </UserUI>
-    //         <TopText>전투력의 경우 하루 전의 서버에 저장된 캐릭터의 스탯임으로 정확한 측정을 위해서는 캐릭터의 셋팅을 변경해 주시기 바랍니다.</TopText>
-    //         <ShowText>직업: {info!=="N/A" ? info.character_class : "N/A"}
-    //             <br></br>레벨: {info!=="N/A" ? info.character_level+"Lv" : "0Lv"}
-    //             <br></br>전투력: {combatpower ? combatpower : "N/A"}
-    //             <br></br>전투력 배율: {multiple!==null ? multiple+"배" : "N/A"}
-    //             <br></br>표준 전투력: {localPower!=0 ? localPower : "N/A"}
-    //             {warning ? <h1 style={{fontSize: "50px", padding: "30px 50px 0px 0px"}}>제논과 데몬어벤져는 데이터가 부족해 나타나지 않습니다.</h1> : null}
-    //         </ShowText>
-    //     </div>
-    // )
 }
