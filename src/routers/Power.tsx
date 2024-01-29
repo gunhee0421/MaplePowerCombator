@@ -8,6 +8,7 @@ import PowerShow from "../components/PowerShow";
 import GetMultiple from "../components/GetMultiple";
 import { useEffect, useState } from "react";
 
+const Div=styled.div``;
 const UserImg=styled.img`
     position: absolute;
     height: 194px;
@@ -119,7 +120,7 @@ export default function Power() {
     }, [ocid, multiple])
 
     return (
-        <div>
+        <Div>
             <RetrunHome></RetrunHome>
             <UserUI>
                 <UserImg src={info_image ? info_image : "image/maplelogo.gif"}></UserImg>
@@ -133,6 +134,6 @@ export default function Power() {
                 <br></br>표준 전투력: {info_name ? localPower : "N/A"}
                 {warning ? <h1 style={{fontSize: "50px", padding: "30px 50px 0px 0px"}}>제논과 데몬어벤져는 데이터가 부족해 나타나지 않습니다.</h1> : null}
             </ShowText>
-        </div>
+        </Div>
     )
 }

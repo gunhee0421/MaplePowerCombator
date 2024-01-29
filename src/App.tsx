@@ -11,9 +11,11 @@ const Wrapper=styled.div`
 `;
 
 function App() {
+  const basename=process.env.NODE_ENV === 'production' ? '/MaplePower/' : '';
+
   return (
     <Wrapper>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/power" element={<Power />} />

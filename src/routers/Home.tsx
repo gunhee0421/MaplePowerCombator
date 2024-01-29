@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Serch from "../components/Serch";
 
+const Div=styled.div`
+`;
 const Mushroom=styled.img`
     position: absolute;
     height: 194px;
@@ -44,7 +46,7 @@ const SetImg=styled.img`
 
 export default function Home() {
     return(
-        <div>
+        <Div>
             <Mushroom src="image/maplelogo.gif" alt="watiting"/>
             <Title>Maple Power <br></br> Converter</Title>
             <Leap src="image/leap1.png" style={{top: "65%", left: "15%", width: 200,height: 150}}></Leap>
@@ -52,8 +54,7 @@ export default function Home() {
             <Leap src="image/leap3.png" style={{top: "70%", left: "75%", width: 200,height: 150}}></Leap>
             <Boss src="image/Boss.gif" style={{top: "50%", left: "40%"}}></Boss>
             <Set href="https://github.com/gunhee0421"><SetImg src="image/Build circle.png"/></Set>
-
             <Serch></Serch>
-        </div>
+        </Div>
     )
 }
